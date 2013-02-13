@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03362DDE160E06BD005C90BE"
-               BuildableName = "SwitchHRLR.app"
-               BlueprintName = "SwitchHRLR"
+               BuildableName = "Switch HR LR.app"
+               BlueprintName = "Switch HR LR"
                ReferencedContainer = "container:SwitchHRLR.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03362DDE160E06BD005C90BE"
-            BuildableName = "SwitchHRLR.app"
-            BlueprintName = "SwitchHRLR"
+            BuildableName = "Switch HR LR.app"
+            BlueprintName = "Switch HR LR"
             ReferencedContainer = "container:SwitchHRLR.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,8 +52,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03362DDE160E06BD005C90BE"
-            BuildableName = "SwitchHRLR.app"
-            BlueprintName = "SwitchHRLR"
+            BuildableName = "Switch HR LR.app"
+            BlueprintName = "Switch HR LR"
             ReferencedContainer = "container:SwitchHRLR.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,8 +70,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03362DDE160E06BD005C90BE"
-            BuildableName = "SwitchHRLR.app"
-            BlueprintName = "SwitchHRLR"
+            BuildableName = "Switch HR LR.app"
+            BlueprintName = "Switch HR LR"
             ReferencedContainer = "container:SwitchHRLR.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

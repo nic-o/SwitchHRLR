@@ -113,9 +113,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		03362DDE160E06BD005C90BE /* SwitchHRLR */ = {
+		03362DDE160E06BD005C90BE /* Switch HR LR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03362DFD160E06BD005C90BE /* Build configuration list for PBXNativeTarget "SwitchHRLR" */;
+			buildConfigurationList = 03362DFD160E06BD005C90BE /* Build configuration list for PBXNativeTarget "Switch HR LR" */;
 			buildPhases = (
 				03F13F1E16CB783C000678AD /* ShellScript */,
 				03362DDB160E06BD005C90BE /* Sources */,
@@ -126,7 +126,7 @@
 			);
 			dependencies = (
 			);
-			name = SwitchHRLR;
+			name = "Switch HR LR";
 			productName = SwitchHRLR;
 			productReference = 03362DDF160E06BD005C90BE /* SwitchHRLR.app */;
 			productType = "com.apple.product-type.application";
@@ -152,7 +152,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03362DDE160E06BD005C90BE /* SwitchHRLR */,
+				03362DDE160E06BD005C90BE /* Switch HR LR */,
 			);
 		};
 /* End PBXProject section */
@@ -319,7 +319,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03362DFD160E06BD005C90BE /* Build configuration list for PBXNativeTarget "SwitchHRLR" */ = {
+		03362DFD160E06BD005C90BE /* Build configuration list for PBXNativeTarget "Switch HR LR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03362DFE160E06BD005C90BE /* Debug */,
