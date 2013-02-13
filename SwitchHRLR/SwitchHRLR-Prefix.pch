@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'SwitchHRLR' target in the 'SwitchHRLR' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
