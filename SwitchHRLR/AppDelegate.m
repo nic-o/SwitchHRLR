@@ -25,6 +25,8 @@
   BOOL isMultiplePhotothequeConnected = [urls containsObject:[NSURL URLWithString:@"file://localhost/Volumes/Phototheque-1/"]];
   NSLog(@"Multiple servers connected: %s", isMultiplePhotothequeConnected ? "true" : "false");
   if (isMultiplePhotothequeConnected) {
+    
+    // Voir si la method utilise dans Lynda.com/Cocoa/02.08 est meilleure
     NSBeginCriticalAlertSheet(@"Multiple Phototheque",
                               @"High Resolution", // == NSAlertDefaultReturn
                               nil,                // == NSAlertAlternateReturn
