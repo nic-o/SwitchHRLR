@@ -22,7 +22,7 @@
   NSLog(@"%@", urls);
   
   // Check if there's multiple phototheque connected
-  BOOL isMultiplePhotothequeConnected = [urls containsObject:[NSURL URLWithString:@"file://localhost/Volumes/Phototheque-1/"]];
+  BOOL isMultiplePhotothequeConnected = [urls containsObject:[NSURL URLWithString:@"file:///Volumes/Phototheque-1/"]];
   NSLog(@"Multiple servers connected: %s", isMultiplePhotothequeConnected ? "true" : "false");
   if (isMultiplePhotothequeConnected) {
     
@@ -41,14 +41,14 @@
   }
   
   
-  //
-  BOOL isPhotothequeConnected = [urls containsObject:[NSURL URLWithString:@"file://localhost/Volumes/Phototheque/"]];
+  BOOL isPhotothequeConnected = [urls containsObject:[NSURL URLWithString:@"file:///Volumes/Phototheque/"]];
+  NSLog(@"isPhotothequeConnected: %s", isPhotothequeConnected ? "true" : "false");
   
   if (isPhotothequeConnected) {
     NSLog(@"Phototheque connected...");
     NSError *error;
     NSString *volumeFormat;
-    NSInteger indexOfphototheque = [urls indexOfObject:[NSURL URLWithString:@"file://localhost/Volumes/Phototheque/"]];
+    NSInteger indexOfphototheque = [urls indexOfObject:[NSURL URLWithString:@"file:///Volumes/Phototheque/"]];
     NSURL *volume = [urls objectAtIndex:indexOfphototheque];
     [displayLogs setStringValue:[NSString stringWithFormat:@"Phototheque connected at index %ld.", (long)indexOfphototheque]];
     [volume getResourceValue:&volumeFormat forKey:NSURLVolumeLocalizedFormatDescriptionKey error:&error];
@@ -118,7 +118,7 @@
     mountDict = [NSDictionary dictionaryWithObjectsAndKeys:
                  @"layout-macdata", @"kServerNameKey",
                  @"Phototheque", @"kVolumeNameKey",
-                 @"smb", @"kTransportNameKey",
+                 @"cifs", @"kTransportNameKey",
                  @"", @"kMountDirectoryKey",
                  @"Layout", @"kUserNameKey",
                  @"layout", @"kPasswordKey",
@@ -142,6 +142,7 @@
     
   NSDictionary *mountDict;
   mountDict = [NSDictionary dictionaryWithObjectsAndKeys:
+//               @"layout.sophieparis.com", @"kServerNameKey",
                @"layout.sophieparis.com", @"kServerNameKey",
                @"Phototheque", @"kVolumeNameKey",
                @"afp", @"kTransportNameKey",
@@ -176,7 +177,7 @@
   mountDict = [NSDictionary dictionaryWithObjectsAndKeys:
                @"layout-macdata", @"kServerNameKey",
                @"Phototheque", @"kVolumeNameKey",
-               @"smb", @"kTransportNameKey",
+               @"cifs", @"kTransportNameKey",
                @"", @"kMountDirectoryKey",
                @"Layout", @"kUserNameKey",
                @"layout", @"kPasswordKey",

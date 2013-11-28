@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03362DDF160E06BD005C90BE /* SwitchHRLR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SwitchHRLR.app; path = "Switch HR LR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03362DDF160E06BD005C90BE /* Switch HR LR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Switch HR LR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03362DE3160E06BD005C90BE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		03362DE6160E06BD005C90BE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		03362DE7160E06BD005C90BE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -60,7 +60,7 @@
 		03362DE0160E06BD005C90BE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03362DDF160E06BD005C90BE /* SwitchHRLR.app */,
+				03362DDF160E06BD005C90BE /* Switch HR LR.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,7 +128,7 @@
 			);
 			name = "Switch HR LR";
 			productName = SwitchHRLR;
-			productReference = 03362DDF160E06BD005C90BE /* SwitchHRLR.app */;
+			productReference = 03362DDF160E06BD005C90BE /* Switch HR LR.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
