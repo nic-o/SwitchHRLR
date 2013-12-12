@@ -21,8 +21,22 @@
                    options:NSVolumeEnumerationSkipHiddenVolumes]; 
   NSLog(@"%@", urls);
   
+  // Apple change the way to urls the paths of Mounted servers:
+  // Version <= 10.8 : file://localhost/Volumes/.....
+  // Version >= 10.9 : file:///Volumes/.....
+  // i.e. http://cocoadev.com/DeterminingOSVersion
+  NSString *versionOS = [[NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"] objectForKey:@"ProductVersion"];
+  NSString *protocole;
+  if ([versionOS isEqualToString:@"10.9"]) {
+    protocole = @"file:///Volumes/";
+  } else {
+    protocole = @"file://localhost/Volumes/";
+  }
+  NSLog(@"Protocole used for OS %@: %@", versionOS, protocole);
+
   // Check if there's multiple phototheque connected
-  BOOL isMultiplePhotothequeConnected = [urls containsObject:[NSURL URLWithString:@"file:///Volumes/Phototheque-1/"]];
+  BOOL isMultiplePhotothequeConnected = [urls containsObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@Phototheque-1/", protocole]]];
+  
   NSLog(@"Multiple servers connected: %s", isMultiplePhotothequeConnected ? "true" : "false");
   if (isMultiplePhotothequeConnected) {
     
@@ -41,29 +55,30 @@
   }
   
   
-  BOOL isPhotothequeConnected = [urls containsObject:[NSURL URLWithString:@"file:///Volumes/Phototheque/"]];
+  BOOL isPhotothequeConnected = [urls containsObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@Phototheque/", protocole]]];
   NSLog(@"isPhotothequeConnected: %s", isPhotothequeConnected ? "true" : "false");
   
   if (isPhotothequeConnected) {
     NSLog(@"Phototheque connected...");
     NSError *error;
     NSString *volumeFormat;
-    NSInteger indexOfphototheque = [urls indexOfObject:[NSURL URLWithString:@"file:///Volumes/Phototheque/"]];
+    NSInteger indexOfphototheque = [urls indexOfObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@Phototheque/", protocole]]];
     NSURL *volume = [urls objectAtIndex:indexOfphototheque];
-    [displayLogs setStringValue:[NSString stringWithFormat:@"Phototheque connected at index %ld.", (long)indexOfphototheque]];
     [volume getResourceValue:&volumeFormat forKey:NSURLVolumeLocalizedFormatDescriptionKey error:&error];
-    NSLog(@"Type of Volume: %@", volumeFormat);
-    [displayLogs setStringValue:[NSString stringWithFormat:@"%@\nType of Server: %@", [displayLogs stringValue], volumeFormat]];
-    
+    NSLog(@"Protocole Network for Phototheque used: %@", volumeFormat);
     
     if ([volumeFormat isEqualToString:@"AppleShare"]) {
-      NSLog(@"High Resolution Server mounted.");
+      NSLog(@"High Resolution Server mounted with protocole %@.", volumeFormat);
+      // [displayLogs setStringValue:[NSString stringWithFormat:@"%@\nYou are connected to the High Resolution Phototheque", [displayLogs stringValue]]];
+      [displayLogs setStringValue:@"You are connected to the High Resolution Phototheque\n"];
       [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"High"]];
       [_highResolutionButton setEnabled:NO];
       [_lowResolutionButton highlight:YES];
 
     } else if ([volumeFormat isEqualToString:@"SMB (NTFS)"]) {
-      NSLog(@"Low Resolution Server.");
+      NSLog(@"Low Resolution Server mounted with protocole %@.", volumeFormat);
+      // [displayLogs setStringValue:[NSString stringWithFormat:@"%@\nYou are connected to the Low Resolution Phototheque", [displayLogs stringValue]]];
+      [displayLogs setStringValue:@"You are connected to the Low Resolution Phototheque\n"];
       [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"Low"]];
       [_lowResolutionButton setEnabled:NO];
       [_highResolutionButton highlight:YES];
@@ -73,6 +88,7 @@
     }
     
   } else {
+    NSLog(@"No server connected....");
     [displayLogs setStringValue:@"There's no phototheque connected."];
     [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"None"]];
     [_highResolutionButton highlight:YES];
@@ -92,7 +108,7 @@
   
   if (resultCode == NSAlertDefaultReturn) {
     // Button connect to HR
-    NSLog(@"Connect to High Res");
+    NSLog(@"Connect to High Resolution Server");
     
     NSDictionary *mountDict;
     mountDict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -107,12 +123,10 @@
     [phototheque mountServer:mountDict];
     NSLog(@"Unmount multiple server and mount High Res");
     [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"High"]];
-//    [_highResolutionButton setEnabled:NO];
-//    [_lowResolutionButton highlight:YES];
   }
   
   if (resultCode == NSAlertOtherReturn) {
-    NSLog(@"Connect to Low Res");
+    NSLog(@"Connect to Low Resolution Server");
     
     NSDictionary *mountDict;
     mountDict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -127,8 +141,6 @@
     [phototheque mountServer:mountDict];
     NSLog(@"Unmount multiple server and mount Low Res");
     [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"Low"]];
-//    [_lowResolutionButton setEnabled:NO];
-//    [_highResolutionButton highlight:YES];
   }
 }
 
@@ -142,7 +154,6 @@
     
   NSDictionary *mountDict;
   mountDict = [NSDictionary dictionaryWithObjectsAndKeys:
-//               @"layout.sophieparis.com", @"kServerNameKey",
                @"layout.sophieparis.com", @"kServerNameKey",
                @"Phototheque", @"kVolumeNameKey",
                @"afp", @"kTransportNameKey",
@@ -153,10 +164,9 @@
                @"kAsyncKey", NULL];
     
   [highRes mountServer:mountDict];
-    
-  NSArray *volumes = [ServerPipe listMountedVolume];
-//  NSLog(@"%@", volumes);
-  [displayLogs setStringValue:[volumes componentsJoinedByString:@"\n"]];
+  
+  NSLog(@"Connect to High Resolution Server");
+  [displayLogs setStringValue:[NSString stringWithFormat:@"%@• Switched to High Resolution\n", [displayLogs stringValue]]];
     
   [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"High"]];
   [_highResolutionButton setEnabled:NO];
@@ -185,7 +195,10 @@
                @"kAsyncKey", NULL];
     
   [lowRes mountServer:mountDict];
-    
+  
+  NSLog(@"Connect to Low Resolution Server");
+  [displayLogs setStringValue:[NSString stringWithFormat:@"%@• Switched to Low Resolution\n", [displayLogs stringValue]]];
+  
   [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"Low"]];
   [_lowResolutionButton setEnabled:NO];
   [_highResolutionButton setEnabled:YES];
